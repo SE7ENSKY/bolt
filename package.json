@@ -4,7 +4,8 @@
   "description": "bolt",
   "main": "built/app.js",
   "scripts": {
-    "start": "node_modules/.bin/coffee src/app.coffee"
+    "start": "node_modules/.bin/coffee src/app.coffee",
+    "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register"
   },
   "repository": {
     "type": "git",
@@ -26,5 +27,11 @@
     "google-spreadsheet": "^0.2.8",
     "moment": "^2.8.3",
     "validate-form": "^1.0.1"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "coffee-script": "*",
+    "exec-sync": "^0.1.6",
+    "mocha": "*"
   }
 }
