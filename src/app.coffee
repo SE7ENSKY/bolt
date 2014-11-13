@@ -24,6 +24,10 @@ sheet.setAuth process.env.GOOGLE_USER, process.env.GOOGLE_PASS, (err) ->
 		
 		app = express()
 		app.enable 'trust proxy'
+		app.use (req, res, next) ->
+			res.header "Access-Control-Allow-Origin", "*"
+			res.header "Access-Control-Allow-Headers", "X-Requested-With"
+			next()
 		app.use require('body-parser').urlencoded
 			extended: on
 			limit: '4kb'
