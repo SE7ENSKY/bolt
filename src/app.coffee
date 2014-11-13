@@ -10,17 +10,6 @@ sheet.setAuth process.env.GOOGLE_USER, process.env.GOOGLE_PASS, (err) ->
 	else
 		express = require 'express'
 		moment = require 'moment'
-		# Validator = require 'validate-form'
-		# validators =
-		# 	truthy: require 'validate-form/truthy'
-		# 	email: require 'validate-form/email'
-		# validateForm = Validator
-		# 	name: [validators.truthy()]
-		# 	email: [validators.truthy(), validators.email("Please ensure that you enter valid email")]
-		# 	phone: []
-		# 	company: []
-		# 	position: []
-		# 	message: []
 
 		reform = require './reform'
 		reformValidator = (req, res, next) ->
@@ -33,7 +22,10 @@ sheet.setAuth process.env.GOOGLE_USER, process.env.GOOGLE_PASS, (err) ->
 				message: off
 			, (err, params) ->
 				if err
-					res.status(409).json err
+					res.status(409).json
+						message: 'ValidationError'
+						code: 'ValidationError'
+						errors: err
 					next "invalid input"
 				else
 					req.body = params
