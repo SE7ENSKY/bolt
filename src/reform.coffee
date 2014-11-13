@@ -14,7 +14,8 @@ module.exports = reform = (data, schema, callback) ->
 			validations = ['required'] if validations and typeof validations is 'boolean'
 			validations = [validations] if typeof validations is 'string'
 			validations = [validations] if typeof validations is 'function'
-			invalids = []
+			invalids = {}
+			hasInvalids = false
 			for validation in validations
 				validator = if typeof validation is 'string'
 					predefinedValidations[validation]
@@ -24,9 +25,10 @@ module.exports = reform = (data, schema, callback) ->
 				if valid and typeof valid is 'boolean'
 					result[key] = value
 				else
-					invalids.push validation.toString()
+					invalids[validation.toString()] = true
+					hasInvalids = yes
 					invalid = yes
-			errors[key] = invalids if invalids.length > 0
+			errors[key] = invalids if hasInvalids
 		else
 			result[key] = value
 	if invalid
