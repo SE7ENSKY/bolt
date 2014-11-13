@@ -1,5 +1,10 @@
 GoogleSpreadsheet = require "google-spreadsheet"
 
+gSatinize = (value) ->
+	if value
+		value.toString().replace ///^[=+-]*///, ''
+	else ""
+
 sheet = new GoogleSpreadsheet process.env.SPREADSHEET_KEY
 # sheet.getRows 1, (err, rows) ->
 # 	console.log 'row count: ' + rows.length
@@ -47,6 +52,13 @@ sheet.setAuth process.env.GOOGLE_USER, process.env.GOOGLE_PASS, (err) ->
 			row.date = now.format 'DD.MM.YYYY'
 			row.time = now.format 'HH:mm:ss'
 			row.ip = req.ip
+			row.name = gSatinize row.name
+			row.email = gSatinize row.email
+			row.phone = gSatinize row.phone
+			row.phone = row.phone.replace ///[^\d]///g, ''
+			row.company = gSatinize row.company
+			row.position = gSatinize row.position
+			row.message = gSatinize row.message
 			sheet.addRow process.env.SPREADSHEET_SHEET_INDEX, row
 			res.send 'ok'
 
