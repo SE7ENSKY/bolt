@@ -1,0 +1,33 @@
+{
+  "name": "bolt",
+  "version": "0.0.1",
+  "description": "bolt",
+  "main": "built/app.js",
+  "scripts": {
+    "prepublish": "node_modules/.bin/coffee -o built -c src",
+    "start": "node built/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/SE7ENSKY/bolt.git"
+  },
+  "keywords": [
+    "backend"
+  ],
+  "author": "Ivan Kravchenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SE7ENSKY/bolt/issues"
+  },
+  "homepage": "https://github.com/SE7ENSKY/bolt",
+  "dependencies": {
+    "body-parser": "^1.9.2",
+    "express": "^4.10.2",
+    "google-spreadsheet": "^0.2.8",
+    "moment": "^2.8.3",
+    "validate-form": "^1.0.1"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.8.0"
+  }
+}
